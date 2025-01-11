@@ -36,6 +36,7 @@ To use the library, create an instance of `Scoreboard` and use its methods to ma
 - The team name is case insensitive, i.e. "Argentina" is the same as "ArGEnTiNa".
 - Team names may contain spaces, digits, special characters, and more e.g. "New Zealand", "Argentina U23", "Storm!".
 - The team name can be **any** string (solely characters, etc.), but it should not be empty.
+- The team name is trimmed before being recorded.
 
 **About the match's finish time:**
 - The instruction says that the finished match is removed from the scoreboard. To obey the instruction, I opted not to add the `finishedTime` & `isFinished` fields in the `Match` struct. However, in a real-life scenario, we may need to keep these fields to keep track of the history of the matches.
