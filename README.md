@@ -14,9 +14,9 @@ To use the library, create an instance of `Scoreboard` and use its methods to ma
 
 ## Example
 ```
-    let scoreboard = Scoreboard()
-    scoreboard.startMatch(homeTeam: "Argentina", awayTeam: "France")
-    scoreboard.updateScore(homeTeam: "Argentina", awayTeam: "France", homeScore: 3, awayScore: 3)
+    var scoreboard = Scoreboard()
+    try scoreboard.startMatch(homeTeam: "Argentina", awayTeam: "France")
+    try scoreboard.updateScore(homeTeam: "Argentina", awayTeam: "France", homeScore: 3, awayScore: 3)
     let summary = scoreboard.getSummary()
     print(summary)
 ```
