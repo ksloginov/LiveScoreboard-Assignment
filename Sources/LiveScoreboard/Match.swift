@@ -1,7 +1,7 @@
 import Foundation
 
 // Match is a struct that represents a match between two teams
-public struct Match: Equatable {
+public struct Match {
     let homeTeam: String
     let awayTeam: String
     let startTime: Date = Date() // We assume the match starts immediately once the struct is initiated. Alternatively, we could use `: Date?` & manually start the match.
