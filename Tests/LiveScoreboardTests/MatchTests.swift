@@ -7,20 +7,21 @@ import Foundation
     let homeTeam = "Argentina"
     let awayTeam = "Brazil"
 
+    
+    let startDate = Date(timeIntervalSinceNow: 1000)
     // When
-    let match = Match(homeTeam: homeTeam, awayTeam: awayTeam)
+    let match = Match(homeTeam: homeTeam, awayTeam: awayTeam, timeProvider: TimeProvider(date: {
+        startDate
+    }))
 
     // Then
-    #expect(match.homeTeam == "Argentina")
     #expect(match.homeTeam == "Argentina")
     #expect(match.awayTeam == "Brazil")
     #expect(match.homeScore == 0)
     #expect(match.awayScore == 0)
     #expect(match.startTime != nil)
 
-    try await Task.sleep(for: .milliseconds(100))
-    #expect(match.startTime < Date())
-    #expect(match.startTime > Date().addingTimeInterval(-1.0))
+    #expect(match.startTime == startDate)
 }
 
 @Test func test_isTeamPlayingInMatch_returnsTrueIfTeamIsPlaying() {
@@ -54,12 +55,20 @@ import Foundation
 
 @Test func test_startTime_isUniqueForEachMatch() async throws {
     // Given
-    let match1 = Match(homeTeam: "Argentina", awayTeam: "Brazil")
-    try await Task.sleep(for: .milliseconds(100))
-    let match2 = Match(homeTeam: "Germany", awayTeam: "France")
+    let startDateMatch1 = Date(timeIntervalSinceNow: 1000)
+    let startDateMatch2 = Date(timeIntervalSinceNow: 1001)
+    let match1 = Match(homeTeam: "Argentina", awayTeam: "Brazil", timeProvider: TimeProvider(date: {
+        startDateMatch1
+    }))
+
+    let match2 = Match(homeTeam: "Germany", awayTeam: "France", timeProvider: TimeProvider(date: {
+        startDateMatch2
+    }))
 
     // Then
     #expect(match1.startTime < match2.startTime)
+    #expect(match1.startTime == startDateMatch1)
+    #expect(match2.startTime == startDateMatch2)
 }
 
 @Test func test_customStringConvertible_descriptionReturnsCorrectString() {
