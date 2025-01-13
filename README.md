@@ -21,6 +21,10 @@ To use the library, create an instance of `Scoreboard` and use its methods to ma
     print(summary)
 ```
 
+## Test coverage
+100%
+<img width="1276" alt="Skjermbilde 2025-01-13 kl  09 29 00" src="https://github.com/user-attachments/assets/70e48e90-8da0-4225-8f5d-e4d9bc675009" />
+
 ## Assumptions / Considerations
 
 - `Total score` is the sum of the scores of both teams.
