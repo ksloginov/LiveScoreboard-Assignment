@@ -16,7 +16,7 @@ public struct Scoreboard {
         }
 
         // Verifying that the teams are not playing right now
-        guard !matches.contains(where: {$0.isTeamPlayingInMatch(homeTeam) || $0.isTeamPlayingInMatch(awayTeam)}) else {
+        guard !matches.contains(where: {$0.isTeamPlayingInMatch(normalizedHomeTeam) || $0.isTeamPlayingInMatch(normalizedAwayTeam)}) else {
             throw ScoreboardError.teamAlreadyInMatch
         }
 
@@ -45,6 +45,7 @@ public struct Scoreboard {
         let normalizedHomeTeam = normalizeTeamName(homeTeam)
         let normalizedAwayTeam = normalizeTeamName(awayTeam)
 
+        // We consider input as order-sensitive: we need to find the match with the exact order of home and away teams
         guard let matchIndex = matches.firstIndex(where: {$0.homeTeam == normalizedHomeTeam && $0.awayTeam == normalizedAwayTeam}) else {
             throw ScoreboardError.matchNotFound
         }
