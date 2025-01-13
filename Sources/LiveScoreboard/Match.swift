@@ -11,7 +11,7 @@ public struct Match {
     var totalScore: Int {
         return homeScore + awayScore
     }
-    
+
     func isTeamPlayingInMatch(_ team: String) -> Bool {
         return team == homeTeam || team == awayTeam
     }
