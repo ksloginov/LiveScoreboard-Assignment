@@ -1,4 +1,4 @@
-# The CI workflow to build the library (triggers manually or by pushing code to `main` or `develop`)
+# The CI workflow to build the library (triggers manually, by pushing code or by opening a pull request to `main` or `develop`)
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
 
 name: CI
@@ -6,6 +6,8 @@ name: CI
 on:
   workflow_dispatch:
   push:
+    branches: [ "main", "develop" ]
+  pull_request:
     branches: [ "main", "develop" ]
 
 jobs:
@@ -15,7 +17,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
+    - name: Configure Xcode
+      uses: ./.github/actions/configure-xcode
+
     - name: Build
       run: swift build -v
+      
     - name: Run tests
       run: swift test -v
